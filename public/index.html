@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<link rel="stylesheet" href="style.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard de Filmes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Raleway:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>Filmes Populares</h1>
+  <div id="filmes-container"></div>
+
+  <script>
+    // Busca os dados da API no servidor e insere os filmes no DOM
+    fetch('/api/movies')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erro ao buscar filmes');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const filmesContainer = document.getElementById('filmes-container');
+        data.results.forEach(filme => {
+          const filmeElement = document.createElement('div');
+          filmeElement.innerHTML = `
+            <h2>${filme.title}</h2>
+            <p>${filme.overview}</p>
+            <p>Avaliação: ${filme.vote_average.toFixed(1)} </p>
+            <img src="https://image.tmdb.org/t/p/w500${filme.poster_path}" alt="${filme.title}">
+          `;
+          filmesContainer.appendChild(filmeElement);
+        });
+      })
+      .catch(error => console.error('Erro ao buscar filmes:', error));
+  </script>
+</body>
+</html>
