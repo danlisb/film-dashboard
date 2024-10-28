@@ -139,3 +139,12 @@ button, nav a {
   font-weight: 500;
   color: #fff;
 }
+
+.filme-card {
+  cursor: pointer; /* Altera o ícone do mouse para uma mãozinha */
+  transition: transform 0.2s; /* Adiciona uma animação de escala ao passar o mouse */
+}
+
+.filme-card:hover {
+  transform: scale(1.05); /* Aumenta levemente o tamanho do card ao passar o mouse */
+}
